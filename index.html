@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Stack GTM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #141414;
+      --surface:   #1c1c1c;
+      --border:    #2a2a2a;
+      --amber:     #C8923A;
+      --amber-dim: #8a6128;
+      --text:      #e8e2d9;
+      --muted:     #7a7066;
+      --font-head: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    /* geometric grid texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* amber glow anchor — bottom left */
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -180px;
+      left: -120px;
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, rgba(200,146,58,0.13) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── layout ── */
+    .shell {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── header ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 36px 0 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .wordmark {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .wordmark span {
+      color: var(--amber);
+    }
+
+    .header-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── main ── */
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0;
+      gap: 0;
+    }
+
+    .eyebrow {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 28px;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+
+    h1 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--text);
+      max-width: 16ch;
+      margin-bottom: 36px;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--amber);
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--amber);
+      margin-bottom: 32px;
+      animation: expandWidth 0.6s 0.4s ease both;
+    }
+
+    p.body-copy {
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 52ch;
+      margin-bottom: 52px;
+      animation: fadeUp 0.7s 0.45s ease both;
+    }
+
+    p.body-copy strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      animation: fadeUp 0.7s 0.55s ease both;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--amber);
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+
+    .btn-primary:hover {
+      background: #dda84a;
+      transform: translateY(-2px);
+    }
+
+    .contact-line {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .contact-line a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-line a:hover {
+      color: var(--amber);
+      border-color: var(--amber);
+    }
+
+    /* ── footer ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0 32px;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.7s 0.65s ease both;
+    }
+
+    .footer-left {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .status-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 2.4s ease infinite;
+    }
+
+    /* ── vertical rule accent ── */
+    .v-rule {
+      position: fixed;
+      top: 0;
+      right: 120px;
+      width: 1px;
+      height: 100vh;
+      background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ── corner accent ── */
+    .corner-mark {
+      position: fixed;
+      top: 36px;
+      right: 48px;
+      width: 32px;
+      height: 32px;
+      border-top: 2px solid var(--amber);
+      border-right: 2px solid var(--amber);
+      z-index: 2;
+      opacity: 0;
+      animation: fadeIn 0.5s 0.8s ease forwards;
+    }
+
+    /* ── animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes expandWidth {
+      from { width: 0; opacity: 0; }
+      to   { width: 48px; opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ── mobile ── */
+    @media (max-width: 640px) {
+      html, body { overflow: auto; }
+      .shell { padding: 0 24px; height: auto; min-height: 100vh; }
+      header { padding-top: 28px; }
+      h1 { font-size: 2.6rem; }
+      .cta-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .v-rule { display: none; }
+      footer { flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="v-rule"></div>
+  <div class="corner-mark"></div>
+
+  <div class="shell">
+    <header>
+      <div class="wordmark">Full Stack <span>GTM</span></div>
+      <div class="header-tag">fullstackgtm.io</div>
+    </header>
+
+    <main>
+      <div class="eyebrow">Advisory Practice — Launching Soon</div>
+      <h1>Build the <em>business</em> behind your expertise.</h1>
+      <div class="divider"></div>
+      <p class="body-copy">
+        <strong>Full Stack GTM</strong> helps technical professionals master the business fundamentals of their practice — so they can stop selling hours and start building a scalable consulting business with long-term financial security and growth.
+      </p>
+      <div class="cta-row">
+        <a class="btn-primary" href="YOUR_CALENDLY_LINK_HERE">Book a Fit Call</a>
+        <span class="contact-line">Or reach out at <a href="mailto:tim@fullstackgtm.io">tim@fullstackgtm.io</a></span>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-left">© 2025 Full Stack GTM</div>
+      <div class="status-pill">Site launching soon</div>
+    </footer>
+  </div>
+
+</body>
+</html>
