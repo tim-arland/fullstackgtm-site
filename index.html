@@ -1,339 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Full Stack GTM</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Stack GTM — Build a Practice, Not a Job</title>
+  <meta name="description" content="Full Stack GTM helps technical professionals master the business fundamentals of independent consulting — so they can stop selling hours and start building a scalable practice.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg:        #141414;
-      --surface:   #1c1c1c;
-      --border:    #2a2a2a;
-      --amber:     #C8923A;
-      --amber-dim: #8a6128;
-      --text:      #e8e2d9;
-      --muted:     #7a7066;
-      --font-head: 'Barlow Condensed', sans-serif;
-      --font-body: 'Barlow', sans-serif;
+    body {
+      background: #191E24;
+      font-family: Calibri, 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+      color: #F0EDE8;
+      min-height: 100vh;
     }
 
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-      overflow: hidden;
-    }
-
-    /* geometric grid texture */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 64px 64px;
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* amber glow anchor — bottom left */
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: -180px;
-      left: -120px;
-      width: 560px;
-      height: 560px;
-      background: radial-gradient(circle, rgba(200,146,58,0.13) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── layout ── */
-    .shell {
-      position: relative;
-      z-index: 1;
-      height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      max-width: 1200px;
-      margin: 0 auto;
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #191E24;
+      border-bottom: 1px solid #252C34;
       padding: 0 48px;
-    }
-
-    /* ── header ── */
-    header {
+      height: 62px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 36px 0 0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 20px;
-      animation: fadeUp 0.7s ease both;
     }
 
-    .wordmark {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .wordmark span {
-      color: var(--amber);
-    }
-
-    .header-tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── main ── */
-    main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0;
-      gap: 0;
-    }
-
-    .eyebrow {
-      font-family: var(--font-head);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 28px;
-      animation: fadeUp 0.7s 0.15s ease both;
-    }
-
-    h1 {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: clamp(2.8rem, 5.5vw, 5rem);
-      line-height: 0.95;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
-      color: var(--text);
-      max-width: 16ch;
-      margin-bottom: 36px;
-      animation: fadeUp 0.7s 0.25s ease both;
-    }
-
-    h1 em {
-      font-style: normal;
-      color: var(--amber);
-    }
-
-    .divider {
-      width: 48px;
-      height: 2px;
-      background: var(--amber);
-      margin-bottom: 32px;
-      animation: expandWidth 0.6s 0.4s ease both;
-    }
-
-    p.body-copy {
-      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-      line-height: 1.65;
-      color: var(--muted);
-      max-width: 52ch;
-      margin-bottom: 52px;
-      animation: fadeUp 0.7s 0.45s ease both;
-    }
-
-    p.body-copy strong {
-      color: var(--text);
-      font-weight: 400;
-    }
-
-    .cta-row {
+    .nav-links {
       display: flex;
       align-items: center;
       gap: 32px;
-      animation: fadeUp 0.7s 0.55s ease both;
     }
+
+    .nav-links a {
+      color: #7A8490;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: #F0EDE8; }
 
     .btn-primary {
-      display: inline-block;
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--bg);
-      background: var(--amber);
-      padding: 16px 36px;
+      background: #C97D2A;
+      color: #191E24;
+      font-family: Calibri, 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 9px 20px;
+      border-radius: 3px;
       border: none;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    }
-
-    .btn-primary:hover {
-      background: #dda84a;
-      transform: translateY(-2px);
-    }
-
-    .contact-line {
-      font-size: 0.8rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    .contact-line a {
-      color: var(--text);
       text-decoration: none;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1px;
-      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+      transition: background 0.15s;
     }
 
-    .contact-line a:hover {
-      color: var(--amber);
-      border-color: var(--amber);
+    .btn-primary:hover { background: #E8A84A; }
+
+    /* HERO */
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 96px 48px 112px;
     }
 
-    /* ── footer ── */
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #F0EDE8;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+
+    .hero h1 span { color: #C97D2A; }
+
+    .hero p {
+      font-size: 17px;
+      color: #7A8490;
+      line-height: 1.65;
+      max-width: 500px;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-ghost {
+      color: #7A8490;
+      font-size: 13px;
+      font-family: Calibri, 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .btn-ghost:hover { color: #F0EDE8; }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid #252C34;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* PILLARS */
+    .pillars {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C97D2A;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #F0EDE8;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: #7A8490;
+      line-height: 1.6;
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .pillar-card {
+      background: #252C34;
+      border: 0.5px solid #2E3740;
+      border-radius: 4px;
+      padding: 16px 18px;
+    }
+
+    .pillar-num {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #C97D2A;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .pillar-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #F0EDE8;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .pillar-desc {
+      font-size: 11px;
+      color: #7A8490;
+      line-height: 1.55;
+    }
+
+    /* OFFERS */
+    .offers {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .offer-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .offer-card {
+      background: #252C34;
+      border: 0.5px solid #2E3740;
+      border-radius: 4px;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .offer-step {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #C97D2A;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .offer-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #F0EDE8;
+      margin-bottom: 8px;
+    }
+
+    .offer-desc {
+      font-size: 12px;
+      color: #7A8490;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .offer-price {
+      font-size: 11px;
+      color: #C97D2A;
+      font-weight: 700;
+      margin-top: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    /* FOOTER */
     footer {
+      border-top: 1px solid #252C34;
+      padding: 28px 48px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 20px 0 32px;
-      border-top: 1px solid var(--border);
-      animation: fadeUp 0.7s 0.65s ease both;
-    }
-
-    .footer-left {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .status-pill {
-      display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
+      max-width: 100%;
     }
 
-    .status-pill::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--amber);
-      animation: pulse 2.4s ease infinite;
+    footer p {
+      font-size: 11px;
+      color: #7A8490;
+      letter-spacing: 0.04em;
     }
 
-    /* ── vertical rule accent ── */
-    .v-rule {
-      position: fixed;
-      top: 0;
-      right: 120px;
-      width: 1px;
-      height: 100vh;
-      background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
-      z-index: 0;
-      opacity: 0.5;
-    }
-
-    /* ── corner accent ── */
-    .corner-mark {
-      position: fixed;
-      top: 36px;
-      right: 48px;
-      width: 32px;
-      height: 32px;
-      border-top: 2px solid var(--amber);
-      border-right: 2px solid var(--amber);
-      z-index: 2;
-      opacity: 0;
-      animation: fadeIn 0.5s 0.8s ease forwards;
-    }
-
-    /* ── animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    @keyframes expandWidth {
-      from { width: 0; opacity: 0; }
-      to   { width: 48px; opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.3; }
-    }
-
-    /* ── mobile ── */
-    @media (max-width: 640px) {
-      html, body { overflow: auto; }
-      .shell { padding: 0 24px; height: auto; min-height: 100vh; }
-      header { padding-top: 28px; }
-      h1 { font-size: 2.6rem; }
-      .cta-row { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .v-rule { display: none; }
-      footer { flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 40px; }
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      .nav-links a { display: none; }
+      .hero { padding: 60px 20px 72px; }
+      .pillars, .offers { padding: 60px 20px; }
+      .pillar-grid { grid-template-columns: 1fr 1fr; }
+      .offer-row { grid-template-columns: 1fr 1fr; }
+      footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <div class="v-rule"></div>
-  <div class="corner-mark"></div>
+  <!-- NAV -->
+  <nav>
+    <svg viewBox="0 0 296 50" width="162" height="27" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="4" height="50" fill="#C97D2A"/>
+      <text x="18" y="33" font-family="Calibri, 'Gill Sans MT', 'Trebuchet MS', sans-serif" font-size="20" font-weight="700" letter-spacing="2.5">
+        <tspan fill="#F0EDE8">FULL STACK </tspan><tspan fill="#C97D2A">GTM</tspan>
+      </text>
+    </svg>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#contact" class="btn-primary">Book a Fit Call</a>
+    </div>
+  </nav>
 
-  <div class="shell">
-    <header>
-      <div class="wordmark">Full Stack <span>GTM</span></div>
-      <div class="header-tag">fullstackgtm.io</div>
-    </header>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Stop selling hours.<br><span>Start building a practice.</span></h1>
+    <p>The commercial infrastructure technical professionals need to run a scalable, financially durable consulting business.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Book a Free Fit Call</a>
+      <a href="#services" class="btn-ghost">See how it works →</a>
+    </div>
+  </section>
 
-    <main>
-      <div class="eyebrow">Advisory Practice — Launching Soon</div>
-      <h1>Build the <em>business</em> behind your expertise.</h1>
-      <div class="divider"></div>
-      <p class="body-copy">
-        <strong>Full Stack GTM</strong>   helps technical professionals master the business fundamentals of their practice. Stop selling hours. Start building a consulting business with long-term financial security and growth.
-      </p>
-      <div class="cta-row">
-        <a class="btn-primary" href="YOUR_CALENDLY_LINK_HERE">Book a Fit Call</a>
-        <span class="contact-line">Or reach out at <a href="mailto:tim@fullstackgtm.io">tim@fullstackgtm.io</a></span>
+  <hr class="divider">
+
+  <!-- NINE PILLARS -->
+  <section class="pillars" id="services">
+    <p class="section-eyebrow">The Assessment</p>
+    <h2 class="section-title">Nine pillars. One diagnosis.</h2>
+    <p class="section-sub">The Full Stack GTM Practice Readiness Assessment evaluates your GTM readiness and optimization across nine dimensions — and tells you exactly where revenue is leaking and why.</p>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <p class="pillar-num">01</p>
+        <p class="pillar-name">Verticalization</p>
+        <p class="pillar-desc">Is your client base concentrated in a recognizable industry, or random?</p>
       </div>
-    </main>
+      <div class="pillar-card">
+        <p class="pillar-num">02</p>
+        <p class="pillar-name">Acquisition Source</p>
+        <p class="pillar-desc">Is there a repeatable motion behind how engagements start, or just fortunate timing?</p>
+      </div>
+      <div class="pillar-card">
+        <p class="pillar-num">03</p>
+        <p class="pillar-name">Scope Definition</p>
+        <p class="pillar-desc">The gap between what you were hired to do and what you can see needs doing is expansion revenue you're not capturing.</p>
+      </div>
+      <div class="pillar-card">
+        <p class="pillar-num">04</p>
+        <p class="pillar-name">Buyer Identity</p>
+        <p class="pillar-desc">Who actually purchased the engagement? That gap determines whether you can ever sell beyond the original SOW.</p>
+      </div>
+      <div class="pillar-card">
+        <p class="pillar-num">05</p>
+        <p class="pillar-name">Revenue Visibility</p>
+        <p class="pillar-desc">Do you know where next year's projects come from? Most don't. That's a positioning problem, not a pipeline problem.</p>
+      </div>
+      <div class="pillar-card">
+        <p class="pillar-num">06</p>
+        <p class="pillar-name">Pricing Rationale</p>
+        <p class="pillar-desc">What you're charging matters less than why. The why is the diagnostic.</p>
+      </div>
+      <div class="pillar-card">
+        <p class="pillar-num">07</p>
+        <p class="pillar-name">Proactive Proposal Motion</p>
+        <p class="pillar-desc">Identifying and proposing work the client didn't ask for is the difference between a vendor and a trusted advisor.</p>
+      </div>
+      <div class="pillar-card">
+        <p class="pillar-num">08</p>
+        <p class="pillar-name">Value Artifact Delivery</p>
+        <p class="pillar-desc">The git commit is invisible to the person who signed the check. What else are you producing?</p>
+      </div>
+      <div class="pillar-card">
+        <p class="pillar-num">09</p>
+        <p class="pillar-name">Methodology Development</p>
+        <p class="pillar-desc">Are you capturing what you learn on each engagement, or starting from scratch every time?</p>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <div class="footer-left">© 2025 Full Stack GTM</div>
-      <div class="status-pill">Site launching soon</div>
-    </footer>
-  </div>
+  <hr class="divider">
+
+  <!-- OFFERS -->
+  <section class="offers" id="about">
+    <p class="section-eyebrow">How it works</p>
+    <h2 class="section-title">Every stage earns its place.</h2>
+    <p class="section-sub">No large upfront commitment before trust is established. Each step delivers standalone value and a clear path to the next.</p>
+    <div class="offer-row">
+      <div class="offer-card">
+        <p class="offer-step">Step 01</p>
+        <p class="offer-name">Fit Call</p>
+        <p class="offer-desc">30 minutes. Mutual qualification. You leave with one specific, actionable insight drawn from the conversation — before spending a dollar.</p>
+        <p class="offer-price">No charge</p>
+      </div>
+      <div class="offer-card">
+        <p class="offer-step">Step 02</p>
+        <p class="offer-name">Practice Audit</p>
+        <p class="offer-desc">Scored assessment across all nine pillars with industry benchmarks and a prioritized what/why action plan. The diagnosis — not the how.</p>
+        <p class="offer-price">$1,500</p>
+      </div>
+      <div class="offer-card">
+        <p class="offer-step">Step 03</p>
+        <p class="offer-name">Sprint</p>
+        <p class="offer-desc">30 days. One problem. One deliverable. Defined scope, outcome-priced. Stack sprints as confidence and cash flow builds.</p>
+        <p class="offer-price">Outcome-priced</p>
+      </div>
+      <div class="offer-card">
+        <p class="offer-step">Step 04</p>
+        <p class="offer-name">Retainer</p>
+        <p class="offer-desc">Ongoing advisory after the foundation is built. Reserved for clients who have completed the full progression.</p>
+        <p class="offer-price">By arrangement</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CTA FOOTER BAND -->
+  <section id="contact" style="max-width: 960px; margin: 0 auto; padding: 80px 48px; text-align: left;">
+    <p class="section-eyebrow">Get started</p>
+    <h2 class="section-title" style="max-width: 480px;">30 minutes. No pitch. One useful insight.</h2>
+    <p class="section-sub" style="margin-bottom: 32px;">The Fit Call is mutual qualification — Tim is choosing clients as carefully as you're choosing an advisor. You'll leave with something specific and actionable regardless of what comes next.</p>
+    <a href="mailto:tim@fullstackgtm.io" class="btn-primary" style="font-size: 14px; padding: 12px 28px;">Book a Free Fit Call</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <svg viewBox="0 0 296 54" width="120" height="22" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="296" height="3" fill="#C97D2A"/>
+      <text x="0" y="42" font-family="Calibri, 'Gill Sans MT', 'Trebuchet MS', sans-serif" font-size="20" font-weight="700" letter-spacing="2.5">
+        <tspan fill="#F0EDE8">FULL STACK </tspan><tspan fill="#C97D2A">GTM</tspan>
+      </text>
+    </svg>
+    <p>© 2025 Full Stack GTM · fullstackgtm.io</p>
+    <p>tim@fullstackgtm.io</p>
+  </footer>
 
 </body>
 </html>
